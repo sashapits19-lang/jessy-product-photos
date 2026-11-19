@@ -7,7 +7,7 @@ function ready(f){if(document.readyState==='loading')document.addEventListener('
 /* 1. Пошук: синоніми і підказки */
 if(/\/catalog\/search\/?$/.test(p)){
   var q=(new URLSearchParams(location.search).get('q')||'').toLowerCase().trim();
-  var S=[[/про\s*-?\s*план|проплан|pro\s*-?plan/,'pro plan'],[/[дй]?[жз]?[ий]?оз[еэ]р|джозер|йозер|жозер|иозер/,'josera'],[/роял|ройал|роял\s*канин/,'royal canin'],[/брит\b/,'brit'],[/фарм[іи]на/,'farmina'],[/амброз[іи]я/,'ambrosia'],[/сав[оа]р[іи]/,'savory'],[/мон[дж]?ж?е\b/,'monge']];
+  var S=[[/про\s*-?\s*план|проплан|pro\s*-?plan/,'pro plan'],[/(дж|й|ж|и)оз[еэ]р/,'josera'],[/роял|ройал|роял\s*канин/,'royal canin'],[/брит\b/,'brit'],[/фарм[іи]на/,'farmina'],[/амброз[іи]я/,'ambrosia'],[/сав[оа]р[іи]/,'savory'],[/мон[дж]?ж?е\b/,'monge']];
   ready(function(){
     var m=(document.querySelector('main')||document.body).innerText;
     if(!/Немає товарів|Нет товаров/.test(m))return;
