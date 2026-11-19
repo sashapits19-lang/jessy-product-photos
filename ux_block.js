@@ -59,7 +59,7 @@ ready(function(){
   if(!main||document.getElementById('jx-deliv'))return;
   var info=document.createElement('div');info.id='jx-deliv';
   info.innerHTML=ru?'🚚 <b>Бесплатная доставка от 2000 грн</b><br>📦 Новая почта, Укрпочта · 🏪 Самовывоз: Черновцы, ул. Энтузиастов, 2А<br>📞 Вопросы по товару: <a href="'+TEL+'">'+TELT+'</a>':'🚚 <b>Безкоштовна доставка від 2000 грн</b><br>📦 Нова пошта, Укрпошта · 🏪 Самовивіз: Чернівці, вул. Ентузіастів, 2А<br>📞 Питання щодо товару: <a href="'+TEL+'">'+TELT+'</a>';
-  var host=main.parentElement;for(var i=0;i<3&&host.parentElement&&host.offsetWidth<200;i++)host=host.parentElement;
+  var host=main.closest('.product-card__order');if(!host){host=main;for(var i=0;i<5&&host.parentElement&&/flex|grid/.test(getComputedStyle(host.parentElement).display)&&getComputedStyle(host.parentElement).flexDirection!=='column';i++)host=host.parentElement}
   host.parentNode.insertBefore(info,host.nextSibling);
   if(!mob())return;
   var price='',ip=document.querySelector('[itemprop=price]');if(ip&&+(ip.content||ip.textContent))price=Math.round(+(ip.content||ip.textContent)).toLocaleString('uk-UA')+' грн';[].slice.call(document.querySelectorAll('script[type="application/ld+json"]')).forEach(function(s){var m=s.textContent.match(/"price"\s*:\s*"?([\d.]+)/);if(m&&!price)price=Math.round(+m[1]).toLocaleString('uk-UA')+' грн'});
