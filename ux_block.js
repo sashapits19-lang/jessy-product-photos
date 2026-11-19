@@ -85,5 +85,33 @@ if(p==='/'||p==='/ru/'||p==='/ru'){ready(function(){
   var A={'/tovary-dlya-sobak/':['Товари для собак','Товары для собак'],'/tovary-dlya-koshek-i-kotov/':['Товари для котів','Товары для кошек'],'/tovary-dlya-gryzunov/':['Товари для гризунів','Товары для грызунов'],'/tovary-dlya-popugaev-i-ptits/':['Товари для птахів','Товары для птиц'],'/tovary-dlya-ryb/':['Товари для риб','Товары для рыб'],'/tovary-dlya-reptiliy/':['Товари для рептилій','Товары для рептилий']};
   [].slice.call(document.images).forEach(function(i){if(i.hasAttribute('alt')&&i.alt)return;var a=i.closest('a'),h=a&&a.getAttribute('href')||'';h=h.replace(/^https?:\/\/[^/]+/,'').replace(/^\/ru\//,'/');if(A[h])i.alt=A[h][ru?1:0];else if(/uc-arr-table-marker|uc-b5-img|uc-banner__background/.test(i.className+' '+(i.parentElement&&i.parentElement.className))){i.alt='';i.setAttribute('role','presentation')}});
 })}
+/* 7. «Ви обирали раніше» */
+function lsg(){try{return JSON.parse(localStorage.getItem('jx_my')||'[]')}catch(e){return []}}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.j-buy-button-add,[onclick*="appendProduct"]');if(!b)return;
+  var c=b.closest('.catalogCard-box,.catalog-card,a.jw-c,a.js-c'),a=c&&(c.matches('a')?c:c.querySelector('a[href]'));
+  var url=(a?a.getAttribute('href'):(b.closest('.product-card--main,.product-card__order,.product-order')?location.pathname:''))||'';
+  url=url.replace(/^https?:\/\/[^/]+/,'').replace(/^\/ru\//,'/').split('#')[0].split('?')[0];if(!url||url==='/')return;
+  try{var L=lsg().filter(function(x){return x!==url});L.unshift(url);localStorage.setItem('jx_my',JSON.stringify(L.slice(0,12)))}catch(e){}
+},true);
+if(p==='/'||p==='/ru/'||p==='/ru'){ready(function(){
+  var L=lsg();if(!L.length||document.getElementById('jx-my'))return;
+  var anchor=document.getElementById('jessy-week-box')||document.querySelector('.banners-group');if(!anchor)return;
+  var box=document.createElement('div');box.id='jx-my';box.style.display='none';
+  box.innerHTML='<h2>'+(ru?'🛒 Вы выбирали раньше — заказать снова':'🛒 Ви обирали раніше — замовити знову')+'</h2><div class="jx-g"></div>';
+  if(anchor.id==='jessy-week-box')anchor.parentNode.insertBefore(box,anchor);else anchor.parentNode.insertBefore(box,anchor.nextSibling);
+  var g=box.querySelector('.jx-g'),n=0;
+  L.slice(0,8).forEach(function(u){
+    var a=document.createElement('a');a.className='jw-c';a.href=pre+u;a.style.display='none';g.appendChild(a);
+    fetch(pre+u,{credentials:'same-origin'}).then(function(r){return r.text()}).then(function(h){
+      var m=h.match(/<button[^>]*class="j-buy-button-add[^"]*"[^>]*id="j-buy-button-widget-(\d+)"|id="j-buy-button-widget-(\d+)"[^>]*class="j-buy-button-add/);if(!m||n>=6)return;
+      var d=new DOMParser().parseFromString(h,'text/html'),img=d.querySelector('meta[property="og:image"]'),t=(d.querySelector('h1')||{}).textContent||'',ip=d.querySelector('[itemprop=price]');
+      var pr=ip?Math.round(+(ip.content||ip.textContent)):0;if(!pr)return;
+      a.innerHTML=(img?'<img loading="lazy" src="'+img.content+'" alt="'+t.trim().replace(/"/g,'&quot;')+'">':'')+'<div class="jw-t">'+t.trim()+'</div><div><span class="jw-p">'+pr.toLocaleString('uk-UA')+' грн</span></div>';
+      var b=document.createElement('button');b.type='button';b.className='j-buy-button-add jx-buy';b.id='j-buy-button-widget-'+(m[1]||m[2]);b.setAttribute('data-quantity','1');b.setAttribute('data-gift','0');b.setAttribute('data-cartProductType','product');b.textContent=ru?'Купить':'Купити';b.addEventListener('click',function(e){e.preventDefault()});a.appendChild(b);
+      a.style.display='';n++;box.style.display='';try{BuyButton.initButtons()}catch(e){}
+    }).catch(function(){});
+  });
+})}
+css('#jx-my{max-width:1200px;margin:16px auto;padding:14px;border:2px solid #2b8a3e;border-radius:12px;background:#f6fbf4}#jx-my h2{margin:0 0 10px;font-size:20px;color:#2b8a3e}#jx-my .jx-g{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}@media(max-width:1000px){#jx-my .jx-g{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){#jx-my{margin:12px 8px;padding:10px}#jx-my h2{font-size:17px}#jx-my .jx-g{grid-template-columns:repeat(2,1fr)}}#jx-my a.jw-c{display:flex;flex-direction:column;background:#fff;border-radius:8px;padding:8px;text-decoration:none;color:#222;border:1px solid #e3eedd}#jx-my img{width:100%;aspect-ratio:1;object-fit:contain}#jx-my .jw-t{font-size:13px;margin:6px 0 4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}#jx-my .jw-p{font-weight:700;font-size:16px}#jx-my .jx-buy{margin-top:8px;background:#5cb646}');
 })();
 </script>
