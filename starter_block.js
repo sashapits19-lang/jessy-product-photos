@@ -27,7 +27,7 @@ if(!b)return;
 var pr=(b.textContent.match(/\d[\d\s]*\s?грн/g)||[]).map(function(x){return x.replace(/\s+/g,' ').trim()});
 if(pr.length<2)return;
 var img=d.querySelector('meta[property="og:image"]');
-a.innerHTML=(img?'<img loading="lazy" src="'+img.content+'" alt="">':'')+'<div class="js-t">'+k.i+' '+(ru?k.ru:k.ua)+'</div><div><span class="js-p">'+pr[pr.length-2]+'</span><span class="js-o">'+pr[pr.length-1]+'</span></div><div class="js-b">'+T.b+'</div>';
+a.innerHTML=(img?'<img loading="lazy" src="'+img.content+'" alt="'+(ru?'Стартовый набор: ':'Стартовий набір: ')+(ru?k.ru:k.ua)+'">':'')+'<div class="js-t">'+k.i+' '+(ru?k.ru:k.ua)+'</div><div><span class="js-p">'+pr[pr.length-2]+'</span><span class="js-o">'+pr[pr.length-1]+'</span></div><div class="js-b">'+T.b+'</div>';
 a.style.display='';shown++;box.style.display='';
 }).catch(function(){});
 });

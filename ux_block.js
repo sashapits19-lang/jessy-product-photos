@@ -80,5 +80,10 @@ ready(function(){
     hide();new MutationObserver(hide).observe(r,{childList:true,subtree:true,characterData:true});
   },500);
 });
+/* 6. Підписи фото на головній */
+if(p==='/'||p==='/ru/'||p==='/ru'){ready(function(){
+  var A={'/tovary-dlya-sobak/':['Товари для собак','Товары для собак'],'/tovary-dlya-koshek-i-kotov/':['Товари для котів','Товары для кошек'],'/tovary-dlya-gryzunov/':['Товари для гризунів','Товары для грызунов'],'/tovary-dlya-popugaev-i-ptits/':['Товари для птахів','Товары для птиц'],'/tovary-dlya-ryb/':['Товари для риб','Товары для рыб'],'/tovary-dlya-reptiliy/':['Товари для рептилій','Товары для рептилий']};
+  [].slice.call(document.images).forEach(function(i){if(i.hasAttribute('alt')&&i.alt)return;var a=i.closest('a'),h=a&&a.getAttribute('href')||'';h=h.replace(/^https?:\/\/[^/]+/,'').replace(/^\/ru\//,'/');if(A[h])i.alt=A[h][ru?1:0];else if(/uc-arr-table-marker|uc-b5-img|uc-banner__background/.test(i.className+' '+(i.parentElement&&i.parentElement.className))){i.alt='';i.setAttribute('role','presentation')}});
+})}
 })();
 </script>
