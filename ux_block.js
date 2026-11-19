@@ -113,5 +113,11 @@ if(p==='/'||p==='/ru/'||p==='/ru'){ready(function(){
   });
 })}
 css('#jx-my{max-width:1200px;margin:16px auto;padding:14px;border:2px solid #2b8a3e;border-radius:12px;background:#f6fbf4}#jx-my h2{margin:0 0 10px;font-size:20px;color:#2b8a3e}#jx-my .jx-g{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}@media(max-width:1000px){#jx-my .jx-g{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){#jx-my{margin:12px 8px;padding:10px}#jx-my h2{font-size:17px}#jx-my .jx-g{grid-template-columns:repeat(2,1fr)}}#jx-my a.jw-c{display:flex;flex-direction:column;background:#fff;border-radius:8px;padding:8px;text-decoration:none;color:#222;border:1px solid #e3eedd}#jx-my img{width:100%;aspect-ratio:1;object-fit:contain}#jx-my .jw-t{font-size:13px;margin:6px 0 4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}#jx-my .jw-p{font-weight:700;font-size:16px}#jx-my .jx-buy{margin-top:8px;background:#5cb646}');
+/* 8. Коротша головна на телефоні */
+if((p==='/'||p==='/ru/'||p==='/ru')){ready(function(){
+  if(!mob())return;document.body.classList.add('jx-m');
+  var a=document.querySelector('.about');if(a&&!document.getElementById('jx-more')){a.classList.add('jx-cut');var b=document.createElement('button');b.id='jx-more';b.type='button';b.textContent=ru?'Читать полностью ▾':'Читати повністю ▾';b.onclick=function(){a.classList.remove('jx-cut');b.remove()};a.parentNode.insertBefore(b,a.nextSibling)}
+})}
+css('body.jx-m #jessy-week-box .jw-grid,body.jx-m #jessy-starter-box .js-g,body.jx-m #jx-my .jx-g{display:grid!important;grid-template-columns:none!important;grid-auto-flow:column;grid-auto-columns:44%;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:6px}body.jx-m #jessy-week-box .jw-grid>*,body.jx-m #jessy-starter-box .js-g>*,body.jx-m #jx-my .jx-g>*{scroll-snap-align:start}.about.jx-cut{max-height:320px;overflow:hidden;position:relative}.about.jx-cut:after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(rgba(255,255,255,0),#fff)}#jx-more{display:block;margin:8px auto 20px;padding:10px 18px;border:1px solid #5cb646;border-radius:20px;background:#fff;color:#2b8a3e;font-weight:700;font-size:15px}');
 })();
 </script>
