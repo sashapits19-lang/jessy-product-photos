@@ -55,7 +55,7 @@ if(p==='/'||p==='/ru/'||p==='/ru'){ready(function(){var n=0,iv=setInterval(funct
 css('.jx-buy{margin-top:auto;padding:9px 10px;border:0;border-radius:8px;background:#e8590c;color:#fff;font-weight:700;font-size:14px;cursor:pointer;width:100%}');
 /* 4. Картка товару: доставка, телефон, плаваюча «Купити» */
 ready(function(){
-  var main=[].slice.call(document.querySelectorAll('.j-buy-button-add[id^="j-buy-button-widget-"]')).filter(function(b){return b.offsetParent&&!b.closest('.catalogCard-box,.product-set,.productsSlider,#jessy-week-box,[class*=rcmb],[class*=slider]')})[0];
+  var main=[].slice.call(document.querySelectorAll('.j-buy-button-add[id^="j-buy-button-widget-"],.j-buy-button-remove[id^="j-buy-button-widget-"]')).filter(function(b){return b.offsetParent&&!b.closest('.catalogCard-box,.product-set,.productsSlider,#jessy-week-box,[class*=rcmb],[class*=slider]')})[0];
   if(!main||document.getElementById('jx-deliv'))return;
   var info=document.createElement('div');info.id='jx-deliv';
   info.innerHTML=ru?'🚚 <b>Бесплатная доставка от 2000 грн</b><br>📦 Новая почта, Укрпочта · 🏪 Самовывоз: Черновцы, ул. Энтузиастов, 2А<br>📞 Вопросы по товару: <a href="'+TEL+'">'+TELT+'</a>':'🚚 <b>Безкоштовна доставка від 2000 грн</b><br>📦 Нова пошта, Укрпошта · 🏪 Самовивіз: Чернівці, вул. Ентузіастів, 2А<br>📞 Питання щодо товару: <a href="'+TEL+'">'+TELT+'</a>';
@@ -67,7 +67,7 @@ ready(function(){
   bar.innerHTML='<span class="jx-bp">'+price+'</span><button type="button">'+(ru?'Купить':'Купити')+'</button>';
   document.body.appendChild(bar);
   bar.querySelector('button').onclick=function(){main.click()};
-  var upd=function(){var v=main.getBoundingClientRect().bottom<0;bar.classList.toggle('on',v);document.body.classList.toggle('jx-bar-on',v)};window.addEventListener('scroll',upd,{passive:true});upd();
+  var bb=bar.querySelector('button');var upd=function(){var v=main.getBoundingClientRect().bottom<0;bb.textContent=main.innerText.trim()||bb.textContent;bar.classList.toggle('on',v);document.body.classList.toggle('jx-bar-on',v)};window.addEventListener('scroll',upd,{passive:true});upd();
 });
 css('#jx-deliv{margin:12px 0;padding:10px 12px;border-radius:8px;background:#f3faf0;border:1px solid #d7e8d0;font-size:14px;line-height:1.6;color:#333}#jx-deliv a{color:#2b8a3e;font-weight:700;white-space:nowrap}#jx-bar{position:fixed;left:0;right:0;bottom:0;z-index:2147482000;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fff;box-shadow:0 -2px 10px rgba(0,0,0,.15);transform:translateY(110%);transition:transform .2s}#jx-bar.on{transform:none}#jx-bar .jx-bp{font-size:20px;font-weight:700}#jx-bar button{flex:1;max-width:220px;padding:12px;border:0;border-radius:8px;background:#5cb646;color:#fff;font-size:16px;font-weight:700}body.jx-bar-on .KeyCRM-toggleButtonContainer{bottom:84px!important}body.jx-bar-on .KeyCRM-chatWindowContainer{bottom:150px!important}');
 /* 5. Вітання чату не перекриває товари на телефоні */
