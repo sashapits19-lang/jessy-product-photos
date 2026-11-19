@@ -55,7 +55,7 @@ if(p==='/'||p==='/ru/'||p==='/ru'){ready(function(){var n=0,iv=setInterval(funct
 css('.jx-buy{margin-top:auto;padding:9px 10px;border:0;border-radius:8px;background:#e8590c;color:#fff;font-weight:700;font-size:14px;cursor:pointer;width:100%}');
 /* 4. Картка товару: доставка, телефон, плаваюча «Купити» */
 ready(function(){
-  var main=[].slice.call(document.querySelectorAll('.j-buy-button-add[id^="j-buy-button-widget-"],.j-buy-button-remove[id^="j-buy-button-widget-"]')).filter(function(b){return b.offsetParent&&!b.closest('.catalogCard-box,.product-set,.productsSlider,#jessy-week-box,[class*=rcmb],[class*=slider]')})[0];
+  var main=[].slice.call(document.querySelectorAll('.j-buy-button-add[id^="j-buy-button-widget-"],.j-buy-button-remove[id^="j-buy-button-widget-"]')).filter(function(b){return b.offsetParent&&b.closest('.product-card--main,.product-card__order')&&!b.closest('.catalogCard-box,.catalog-card,.product-set,.productsSlider,#jessy-week-box,[class*=rcmb],[class*=slider]')})[0];
   if(!main||document.getElementById('jx-deliv'))return;
   var info=document.createElement('div');info.id='jx-deliv';
   info.innerHTML=ru?'🚚 <b>Бесплатная доставка от 2000 грн</b><br>📦 Новая почта, Укрпочта · 🏪 Самовывоз: Черновцы, ул. Энтузиастов, 2А<br>📞 Вопросы по товару: <a href="'+TEL+'">'+TELT+'</a>':'🚚 <b>Безкоштовна доставка від 2000 грн</b><br>📦 Нова пошта, Укрпошта · 🏪 Самовивіз: Чернівці, вул. Ентузіастів, 2А<br>📞 Питання щодо товару: <a href="'+TEL+'">'+TELT+'</a>';
