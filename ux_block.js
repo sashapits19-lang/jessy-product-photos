@@ -62,12 +62,12 @@ ready(function(){
   var host=main.parentElement;for(var i=0;i<3&&host.parentElement&&host.offsetWidth<200;i++)host=host.parentElement;
   host.parentNode.insertBefore(info,host.nextSibling);
   if(!mob())return;
-  var price='';[].slice.call(document.querySelectorAll('script[type="application/ld+json"]')).forEach(function(s){var m=s.textContent.match(/"price"\s*:\s*"?([\d.]+)/);if(m&&!price)price=Math.round(+m[1]).toLocaleString('uk-UA')+' грн'});
+  var price='',ip=document.querySelector('[itemprop=price]');if(ip&&+(ip.content||ip.textContent))price=Math.round(+(ip.content||ip.textContent)).toLocaleString('uk-UA')+' грн';[].slice.call(document.querySelectorAll('script[type="application/ld+json"]')).forEach(function(s){var m=s.textContent.match(/"price"\s*:\s*"?([\d.]+)/);if(m&&!price)price=Math.round(+m[1]).toLocaleString('uk-UA')+' грн'});
   var bar=document.createElement('div');bar.id='jx-bar';
   bar.innerHTML='<span class="jx-bp">'+price+'</span><button type="button">'+(ru?'Купить':'Купити')+'</button>';
   document.body.appendChild(bar);
   bar.querySelector('button').onclick=function(){main.click()};
-  new IntersectionObserver(function(e){var v=!e[0].isIntersecting&&e[0].boundingClientRect.top<0;bar.classList.toggle('on',v);document.body.classList.toggle('jx-bar-on',v)}).observe(main);
+  var upd=function(){var v=main.getBoundingClientRect().bottom<0;bar.classList.toggle('on',v);document.body.classList.toggle('jx-bar-on',v)};window.addEventListener('scroll',upd,{passive:true});upd();
 });
 css('#jx-deliv{margin:12px 0;padding:10px 12px;border-radius:8px;background:#f3faf0;border:1px solid #d7e8d0;font-size:14px;line-height:1.6;color:#333}#jx-deliv a{color:#2b8a3e;font-weight:700;white-space:nowrap}#jx-bar{position:fixed;left:0;right:0;bottom:0;z-index:2147482000;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fff;box-shadow:0 -2px 10px rgba(0,0,0,.15);transform:translateY(110%);transition:transform .2s}#jx-bar.on{transform:none}#jx-bar .jx-bp{font-size:20px;font-weight:700}#jx-bar button{flex:1;max-width:220px;padding:12px;border:0;border-radius:8px;background:#5cb646;color:#fff;font-size:16px;font-weight:700}body.jx-bar-on .KeyCRM-toggleButtonContainer{bottom:84px!important}body.jx-bar-on .KeyCRM-chatWindowContainer{bottom:150px!important}');
 /* 5. Вітання чату не перекриває товари на телефоні */
