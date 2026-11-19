@@ -51,7 +51,7 @@ function weekBuy(){
   });
   return true;
 }
-if(p==='/'||p==='/ru/'||p==='/ru'){ready(function(){var n=0,iv=setInterval(function(){if(weekBuy()||++n>40)clearInterval(iv)},500)})}
+if(p==='/'||p==='/ru/'||p==='/ru'){ready(function(){var n=0,iv=setInterval(function(){weekBuy();if(++n>40)clearInterval(iv)},500)})}
 css('.jx-buy{margin-top:auto;padding:9px 10px;border:0;border-radius:8px;background:#e8590c;color:#fff;font-weight:700;font-size:14px;cursor:pointer;width:100%}');
 /* 4. Картка товару: доставка, телефон, плаваюча «Купити» */
 ready(function(){
