@@ -1,6 +1,6 @@
 <script id="jessy-ux">
 (function(){
-var p=location.pathname,ru=/^\/ru(\/|$)/.test(p),pre=ru?'/ru':'',mob=function(){return window.innerWidth<=768};
+var p=location.pathname,ru=/^\/ru(\/|$)/.test(p),pre=ru?'/ru':'',mob=function(){return window.GLOBAL&&GLOBAL.isMobile!==undefined?!!GLOBAL.isMobile:window.innerWidth<=768};
 var TEL='tel:+380997500255',TELT='099 750-02-55';
 function css(t){var s=document.createElement('style');s.textContent=t;document.head.appendChild(s)}
 function ready(f){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',f);else f()}
